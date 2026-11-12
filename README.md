@@ -55,26 +55,30 @@ occurrence of a repeated token. MATH n=30 shows no loss, not a gain.
 ## Install
 
 ```bash
-pip install torch 'transformers>=4.56,<5.3' kvpress fire datasets
-git clone https://github.com/Manaslu-AI/razor && cd razor
+pip install razor-kv
 ```
 
 ## Use
 
 ```python
-from kvpress import KVPressTextGenerationPipeline  # noqa: F401, registers the pipeline
-from transformers import pipeline
+import razor_kv
 
-from razor_kv.press import LocalGatePress
-from razor_kv.ragged import RaggedCache, RaggedDMSPress, enable
-
-pipe = pipeline("kv-press-text-generation", model="Qwen/Qwen3-4B", dtype="float16", device_map="cuda")
-enable(pipe.model)  # per-head ragged attention
-press = RaggedDMSPress(LocalGatePress(path="Manalsu/razor-gate-Qwen3-4B"), threshold=0.0, prefill_chunk=4096)
-print(pipe(long_document, question="...", press=press, cache=RaggedCache())["answer"])  # evicted KV is freed, not masked
+pipe = razor_kv.pipeline("Qwen/Qwen3-4B")  # loads the model and the matching gate from Hugging Face
+print(pipe(long_document, question="...")["answer"])  # evicted KV is freed, not masked
 ```
 
-`path` takes a Hugging Face repo id or a local directory. `RaggedDMSPress` supports batch size 1.
+`threshold=` trades memory for accuracy (higher evicts more, default 0). `gate=` takes your own gate (HF repo id or
+local directory). Batch size 1.
+
+To use the press directly, with your own kvpress pipeline:
+
+```python
+from razor_kv import RaggedCache, enable, press
+
+enable(model)  # per-head ragged attention
+pipe(long_document, question="...", press=press("Qwen/Qwen3-4B"), cache=RaggedCache())
+```
+
 `DMSPress(LocalGatePress(path))` makes the same eviction decisions with kvpress's built-in masking, which saves no
 memory. The RULER numbers were produced that way, through kvpress's `evaluation/evaluate.py` (`run_eval.py` registers
 the gates). Beyond Qwen3's native 32k, load the model with YaRN factor 4; see `bench_memory.py`.
@@ -82,6 +86,7 @@ the gates). Beyond Qwen3's native 32k, load the model with YaRN factor 4; see `b
 ## Train a gate
 
 ```bash
+git clone https://github.com/Manaslu-AI/razor && cd razor && pip install -e .
 git clone --depth 1 https://github.com/NVIDIA/kvpress kvpress-src
 python razor_kv/train_razor.py --model_name Qwen/Qwen3-1.7B --output_dir gates/razor --kvpress_src kvpress-src
 ```

@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "razor-kv"
+version = "0.1.0"
+description = "RAZOR: a learned KV-cache forget gate that deletes evicted KV from GPU memory"
+readme = "README.md"
+license = "Apache-2.0"
+authors = [{ name = "Himansu Rawal" }]
+requires-python = ">=3.10"
+dependencies = ["torch", "transformers>=4.56,<5.3", "kvpress>=0.5"]
+
+[project.urls]
+Homepage = "https://github.com/Manaslu-AI/razor"
+Gates = "https://huggingface.co/Manalsu"
+
+[tool.setuptools]
+packages = ["razor_kv"]
