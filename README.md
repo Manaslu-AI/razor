@@ -15,8 +15,8 @@ Paper: [razor.pdf](razor.pdf) (arXiv version pending).
 
 | Base model | Gate | Size |
 |---|---|---|
-| Qwen/Qwen3-1.7B | [Manaslu-AI/razor-gate-Qwen3-1.7B](https://huggingface.co/Manaslu-AI/razor-gate-Qwen3-1.7B) | 57 MB |
-| Qwen/Qwen3-4B | [Manaslu-AI/razor-gate-Qwen3-4B](https://huggingface.co/Manaslu-AI/razor-gate-Qwen3-4B) | 91 MB |
+| Qwen/Qwen3-1.7B | [Manalsu/razor-gate-Qwen3-1.7B](https://huggingface.co/Manalsu/razor-gate-Qwen3-1.7B) | 57 MB |
+| Qwen/Qwen3-4B | [Manalsu/razor-gate-Qwen3-4B](https://huggingface.co/Manalsu/razor-gate-Qwen3-4B) | 91 MB |
 
 ## Results
 
@@ -70,7 +70,7 @@ from razor_kv.ragged import RaggedCache, RaggedDMSPress, enable
 
 pipe = pipeline("kv-press-text-generation", model="Qwen/Qwen3-4B", dtype="float16", device_map="cuda")
 enable(pipe.model)  # per-head ragged attention
-press = RaggedDMSPress(LocalGatePress(path="Manaslu-AI/razor-gate-Qwen3-4B"), threshold=0.0, prefill_chunk=4096)
+press = RaggedDMSPress(LocalGatePress(path="Manalsu/razor-gate-Qwen3-4B"), threshold=0.0, prefill_chunk=4096)
 print(pipe(long_document, question="...", press=press, cache=RaggedCache())["answer"])  # evicted KV is freed, not masked
 ```
 

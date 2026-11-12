@@ -1,7 +1,7 @@
 """Run the official kvpress evaluation with locally trained gates registered.
 
 Usage (from kvpress-src/evaluation):
-  RAZOR_GATE=Manaslu-AI/razor-gate-Qwen3-1.7B python /path/to/razor/razor_kv/run_eval.py --press_name razor_dms --threshold -2 ...
+  RAZOR_GATE=Manalsu/razor-gate-Qwen3-1.7B python /path/to/razor/razor_kv/run_eval.py --press_name razor_dms --threshold -2 ...
 Gate dirs come from env RAZOR_GATE / KVZAP_GATE.
 """
 import os
