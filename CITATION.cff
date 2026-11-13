@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use RAZOR, please cite the paper."
+title: "RAZOR: Learning What to Forget in the KV Cache with a Description-Length Price"
+authors:
+  - family-names: Rawal
+    given-names: Himansu
+    affiliation: Manaslu Labs
+repository-code: "https://github.com/Manaslu-AI/razor"
+license: Apache-2.0
+preferred-citation:
+  type: article
+  title: "RAZOR: Learning What to Forget in the KV Cache with a Description-Length Price"
+  authors:
+    - family-names: Rawal
+      given-names: Himansu
+      affiliation: Manaslu Labs
+  year: 2026
+  doi: "10.5281/zenodo.24183936"
+  url: "https://doi.org/10.5281/zenodo.24183936"

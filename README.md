@@ -9,7 +9,7 @@ next-token distribution, and a price on every kept token. Dual ascent sets the p
 is no penalty weight to tune. At inference a token is kept if its score is above a threshold (DMS-style, with a short
 sliding window), so how much each head keeps depends on the input.
 
-Paper: [razor.pdf](razor.pdf) (arXiv version pending).
+Paper: [razor.pdf](razor.pdf), DOI [10.5281/zenodo.24183936](https://doi.org/10.5281/zenodo.24183936).
 
 ## Gates
 
@@ -109,11 +109,12 @@ python razor_kv/train_razor.py --model_name Qwen/Qwen3-1.7B --output_dir gates/r
 
 ```bibtex
 @misc{rawal2026razor,
-  title  = {RAZOR: Learning What to Forget in the KV Cache with a Description-Length Price},
-  author = {Rawal, Himansu},
-  year   = {2026},
-  note   = {Manaslu Labs. arXiv version pending},
-  url    = {https://github.com/Manaslu-AI/razor}
+  title     = {RAZOR: Learning What to Forget in the KV Cache with a Description-Length Price},
+  author    = {Rawal, Himansu},
+  year      = {2026},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.24183936},
+  url       = {https://doi.org/10.5281/zenodo.24183936}
 }
 ```
 
